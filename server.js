@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const connectDB = require('./config/db');
+const userRoute = require('./routes/userRoute')
 
 //process.env object is a global Node object, and variables are passed as strings
 //importing .env file
@@ -22,9 +23,11 @@ app.use(express.json());
 //access the url data
 app.use(express.urlencoded({extended: false}));
 
+app.use('/api/users', userRoute)
+
 app.get('*', function (req, res) {
-    console.log('Enpoint does not exist.');
-    res.status(404).send('Enpoint does not exist.');
+    console.log('Endpoint does not exist.');
+    res.status(404).send('Endpoint does not exist.');
 });
 
 const PORT = process.env.PORT || 3000;
