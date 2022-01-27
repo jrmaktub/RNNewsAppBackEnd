@@ -7,14 +7,14 @@ var config = {
     port: 587,
     auth: {
         user: 'jrblockchaindeveloper@gmail.com',
-        pass: 'cripto123'
+        pass: 'Cripto123'
     }
 };
 
 var transporter = nodemailer.createTransport(config);
 
 var defaultMail = {
-    from: 'kferrao16@gmail.com',
+    from: 'jrblockchaindeveloper@gmail.com',
     text: 'test test'
 }
 

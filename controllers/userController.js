@@ -148,9 +148,35 @@ const getUserProfile = async (req, res) =>{
     }
 }
 
+const updateUserProfile = async(req, res) => {
+    const user = await User.findById(req.header._id)
+
+    if(user){
+        user.name = req.body.name || user.name;
+        user.email = req.body.email || user.email
+        user.avatar = req.body.avar || user.avatar
+
+        const updateUser = await user.save()
+
+        res.json({
+            _id: updateUser._id,
+            name: updateUser.name,
+            email: updateUser.email,
+            avatar: updateUser.avar,
+            token: generateToken(updateUser._id)
+        })
+    } else {
+        res.status(404).json({
+            success: false,
+            msg: "User not found"
+        })
+    }
+}
+
 module.exports = {
     registerUser,
     activeToken,
     autUser,
-    getUserProfile
+    getUserProfile,
+    updateUserProfile
 }
